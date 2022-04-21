@@ -1,0 +1,39 @@
+{% load static %}
+<!-- Site Footer-->
+<footer class="site-footer rounded">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <!-- Contact Info-->
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <!-- About Us-->
+                <section class="widget widget-links widget-light-skin">
+                    <h3 class="widget-title">About Us</h3>
+                    <ul>
+                        <li><a href="{% url 'App_User:SignUpView' %}">Start Your Journey with Us</a></li>
+                        <li><a href="{% url 'Home:AboutusView' %}">About ShajBari</a></li>
+                        <li><a href="{% url 'Home:IndexView' %}">Services</a></li>
+                        <li><a href="{% url 'Product:ShopView' %}"">Our Shop</a></li>
+                    </ul>
+                </section>
+            </div>
+            <div class=" col-md-4 col-sm-12">
+                                <!-- Account / Shipping Info-->
+            </div>
+        </div>
+        <hr class="hr-light mt-2">
+        <!-- Copyright-->
+        <div class="row">
+            <div class="col-sm-6">
+                <p class="footer-copyright">© All rights reserved to &nbsp; ShajBari</p>
+            </div>
+            <div class="col-sm-6">
+                <strong></strong>
+                <p class="footer-copyright text-center"><a
+                        href=""
+                        target="_blank"> Privacy Policy</a></p></strong>
+            </div>
+        </div>
+    </div>
+</footer>

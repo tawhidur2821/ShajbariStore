@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title_block %}
+{{ user.username }} Order List
+{% endblock title_block %}
+{% block description_block %}
+{{ setting.description }}
+{% endblock description_block %}
+{% block keywords_block %}
+{{ setting.keywords }}
+{% endblock keywords_block %}
+
+
+{% block category_block %}
+{% include 'home/category_menu.html' %}
+{% endblock category_block %}
+{% block header_block %}
+{% include "home/header.html" %}
+{% endblock header_block %}
+{% block content %}
+<!-- Off-Canvas Wrapper-->
+<div class="offcanvas-wrapper">
+  <!-- Page Title-->
+  <div class="page-title">
+    <div class="container">
+      <div class="column">
+        <h1>My Wishlist</h1>
+      </div>
+      <div class="column">
+        <ul class="breadcrumbs">
+          <li><a href="index.html">Home</a>
+          </li>
+          <li class="separator">&nbsp;</li>
+          <li><a href="account-orders.html">Account</a>
+          </li>
+          <li class="separator">&nbsp;</li>
+          <li>My Wishlist</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Page Content-->
+  <div class="container padding-bottom-3x mb-2">
+    <div class="row">
+      {% block profile_sidebar %}
+      {% include "user/profile_sidebar.html" %}
+      {% endblock profile_sidebar %}
+      <div class="col-lg-8">
+        <div class="padding-top-2x mt-2 hidden-lg-up"></div>
+        <!-- Wishlist Table-->
+        <div class="table-responsive wishlist-table margin-bottom-none">
+          {% if wishlists.exists %}
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th class="text-center"><a class="btn btn-sm btn-outline-danger"
+                    href="{% url 'Order:DeleteFullWishlistView' %}">Clear wishlist (<i class="icon-cross"></i>)</a></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for wishlist in wishlists %}
+
+              <tr>
+                <td>
+                  <div class="product-item"><a class="product-thumb" href="shop-single.html"><img
+                        src="{{ wishlist.product.image.url }}" alt="{{ wishlist.product.title }}"></a>
+                    <div class="product-info">
+                      <h4 class="product-title"><a href="shop-single.html">{{ wishlist.product.title }}</a></h4>
+                      <div class="text-lg text-medium text-muted">&#2547; {{ wishlist.product.price }}</div>
+                      <div>Availability:
+                        <div class="d-inline text-success">In Stock</div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-center"><a class="remove-from-cart"
+                    href="{% url 'Order:DeleteWishlistView' id=wishlist.product.id %}"
+                    onclick="return confirm('Are you sure to delete?')"><i class="icon-cross"></i></a></td>
+              </tr>
+
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <div class="shopping-cart-footer"><br>
+            <h3>Your have no product in wishlist!<i class="far fa-smile-wink"></i></h3>
+            <br><br><br>
+            <div class="text-center">
+              <a class="btn btn-outline-secondary" href="{% url 'Product:ShopView' %}">&nbsp;Go to Shopping
+              </a>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% block footer_block %}
+  {% include "home/footer.html" %}
+  {% endblock footer_block %}
+</div>
+{% endblock content %}
